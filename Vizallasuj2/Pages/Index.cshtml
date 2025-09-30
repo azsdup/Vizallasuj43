@@ -1,54 +1,60 @@
 ﻿@page
-@model Vizallasuj2.Pages.IndexModel
+@using Vizallasuj2.Pages
+@model IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vízállás adatok";
 }
 
-<h1>Index</h1>
+<h1>Vízállás adatok</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<form method="get" class="mb-3">
+    <label for="Folyo">Folyó:</label>
+    <select id="Folyo" name="Folyo">
+        <option value="">(mindegy)</option>
+        @foreach (var f in Model.Folyo)
+        {
+            <option value="@f" selected="@(Model.Folyo == f ? "selected" : null)">@f</option>
+        }
+    </select>
+
+    <label for="Varos" style="margin-left:12px;">Város:</label>
+    <select id="Varos" name="Varos">
+        <option value="">(mindegy)</option>
+        @foreach (var v in Model.Varos)
+        {
+            <option value="@v" selected="@(Model.Varos == v ? "selected" : null)">@v</option>
+        }
+    </select>
+
+    <button type="submit" style="margin-left:12px;">Szűrés</button>
+    <a asp-page="Create" style="margin-left:12px;">+ Új bejegyzés</a>
+</form>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Víz[0].Datum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Víz[0].Vizallas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Víz[0].Varos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Víz[0].Folyo)
-            </th>
+            <th>@Html.DisplayNameFor(_ => Model.VizallasLista[0].Datum)</th>
+            <th>@Html.DisplayNameFor(_ => Model.VizallasLista[0].Ertek)</th>
+            <th>@Html.DisplayNameFor(_ => Model.VizallasLista[0].Varos)</th>
+            <th>@Html.DisplayNameFor(_ => Model.VizallasLista[0].Folyo)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Víz) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Datum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vizallas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Varos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Folyo)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.VizallasLista)
+        {
+            <tr>
+                <td>@item.Datum.ToString("yyyy.MM.dd")</td>
+                <td>@item.Ertek</td>
+                <td>@item.Varos</td>
+                <td>@item.Folyo</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

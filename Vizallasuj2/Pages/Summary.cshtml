@@ -1,0 +1,50 @@
+﻿﻿@page
+@model Vizallasuj2.Pages.SummaryModel
+
+@{
+    ViewData["Title"] = "Összesítő";
+}
+
+<h1>Összesítő</h1>
+
+<form method="get" class="mb-3">
+    <label for="Folyo">Folyó:</label>
+    <select id="Folyo" name="Folyo">
+        @foreach (var f in Model.Folyok)
+        {
+            <option value="@f" selected="@(Model.Folyo == f ? "selected" : null)">@f</option>
+        }
+    </select>
+    <button type="submit" style="margin-left:12px;">Mutasd</button>
+</form>
+
+@if (Model.Rows.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Város</th>
+                <th>Legalacsonyabb (cm)</th>
+                <th>Dátum</th>
+                <th>Legmagasabb (cm)</th>
+                <th>Dátum</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.Rows)
+            {
+                <tr>
+                    <td>@r.Varos</td>
+                    <td>@r.MinValue</td>
+                    <td>@r.MinDate.ToString("yyyy.MM.dd")</td>
+                    <td>@r.MaxValue</td>
+                    <td>@r.MaxDate.ToString("yyyy.MM.dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nincs adat a kiválasztott folyóra.</p>
+}
