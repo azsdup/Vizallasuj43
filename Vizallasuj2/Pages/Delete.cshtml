@@ -1,0 +1,46 @@
+﻿@page
+@model Vizallasuj2.Pages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Víz</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Víz.Datum)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Víz.Datum)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Víz.Vizallas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Víz.Vizallas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Víz.Varos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Víz.Varos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Víz.Folyo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Víz.Folyo)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Víz.id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
